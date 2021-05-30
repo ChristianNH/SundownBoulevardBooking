@@ -154,39 +154,49 @@ namespace SundownBoulevardBooking
 			dr = cmd.ExecuteReader();
 
 			bool foundRows = dr.HasRows;
-			
 
-			if (foundRows)
+			try
 			{
-				int countOfBookedSeats = 0;
-				int maximumAvailableBookedSeats = 0;
-				
-				while (dr.Read())
+				if (foundRows)
 				{
-					if (NullCheck(dr["countOfBookedSeats"]) == System.DBNull.Value)
+					int countOfBookedSeats = 0;
+					int maximumAvailableBookedSeats = 0;
+				
+					while (dr.Read())
+					{
+						if (NullCheck(dr["countOfBookedSeats"]) == System.DBNull.Value)
+						{
+							return true;
+						}
+						countOfBookedSeats = Convert.ToInt32(dr["countOfBookedSeats"]);
+						maximumAvailableBookedSeats = Convert.ToInt32(dr["MaximumSeats"]);
+					}
+
+					dr.Close();
+					con.Close();
+
+					if (countOfBookedSeats >= maximumAvailableBookedSeats)
+					{
+						return false;
+					}
+					else
 					{
 						return true;
 					}
-					countOfBookedSeats = Convert.ToInt32(dr["countOfBookedSeats"]);
-					maximumAvailableBookedSeats = Convert.ToInt32(dr["MaximumSeats"]);
-				}
-				dr.Close();
-				con.Close();
-				if (countOfBookedSeats >= maximumAvailableBookedSeats)
-				{
-					return false;
+
 				}
 				else
 				{
+					dr.Close();
+					con.Close();
 					return true;
 				}
-
 			}
-			else
+			catch (Exception e)
 			{
-				dr.Close();
-				con.Close();
-				return true;
+
+				//Elmah.ErrorSignal.FromContext(HttpContext.Current).Raise(new ApplicationException("The given key was not present in the highlight dictionary for "));
+				return false;
 			}
 
 		}

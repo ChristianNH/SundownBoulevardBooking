@@ -148,17 +148,24 @@
 
 		</template>
 		<div v-if="Step" class="chosenInformation row">
-			<div class="row">
+			
 				<div class="col-6">
 					<b>{{ Name }} </b>
 				</div>
 				<div class="col-6">
 					<b>	{{ Email }}</b>
 				</div>
-			</div>
 			
-			{{ SelectedDate }} {{ SelectedTime }}<br />
-			For {{ PartySize }}
+			
+				<div class="col-6">
+					{{ SelectedDate }} {{ SelectedTime }}
+				</div>
+				<div class="col-6">
+					For {{ PartySize }}
+				</div>
+			
+
+			
 			<div v-if="SelectedDrink" class="row">
 					<div class="col-4">
 						<img class="card-img-top" v-bind:src="SelectedDrink.image_url" alt="" />

@@ -1,0 +1,16 @@
+﻿#filter { margin-bottom: 5px; font-family: Segoe UI Light,Segoe UI,Arial,Helvetica,Verdana,Sans Serif; height: 30px;}
+#filter span.filter { background-color: #6abc49; color: White; cursor: pointer; border-radius: 5px; display: inline-block; padding: 5px; margin-right: 3px; }
+#filter span.all { background-color: #6a6a6a; }
+
+#places { font-family: Segoe UI Light,Segoe UI,Arial,Helvetica,Verdana,Sans Serif;  font-size: 15px;}
+
+
+.wrap {
+    display: flex;
+}
+.left {
+    margin-right: 10px;
+}
+.right {
+    flex-grow: 1;
+}
